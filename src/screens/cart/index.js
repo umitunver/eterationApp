@@ -1,9 +1,10 @@
-const Cart = () => {
+import React from 'react';
+import {View, Text} from 'react-native';
+
+export default function Cart() {
   return (
-    <div>
-      Enter
-    </div>
+    <View>
+      <Text>Cart</Text>
+    </View>
   );
 }
-
-export default Cart;
