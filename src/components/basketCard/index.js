@@ -2,14 +2,14 @@ import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import IncDec from '../incDec';
 
-export default function BasketCard() {
+export default function BasketCard({data}) {
   return (
     <View style={styles.card}>
       <View>
-        <Text style={styles.title}>Samsung s22</Text>
-        <Text style={styles.price}>15.000₺</Text>
+        <Text style={styles.title}>{data?.name}</Text>
+        <Text style={styles.price}>{data?.price}₺</Text>
       </View>
-      <IncDec />
+      <IncDec item={data} />
     </View>
   );
 }

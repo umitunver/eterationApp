@@ -5,12 +5,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home, Cart, Profile, Favorites, Details} from '@src/screens/index';
 import {useDispatch, useSelector} from 'react-redux';
 import {BasketIcon, FavIcon, HomeIcon, PersonIcon} from '@src/constants/icons';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function TabMenu() {
+
+  const {cartItems} = useSelector(state => state.cart);
+
   return (
     <Tab.Navigator
       initialRouteName="HomeTab"
@@ -19,7 +22,14 @@ function TabMenu() {
           if (route.name === 'HomeTab') {
             return <HomeIcon focused={focused} />;
           } else if (route.name === 'Cart') {
-            return <BasketIcon focused={focused} />;
+            return (
+              <View style={{position: 'relative'}}>
+                <BasketIcon focused={focused} />
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{cartItems?.length}</Text>
+                </View>
+              </View>
+            );
           } else if (route.name === 'Favorites') {
             return <FavIcon focused={focused} />;
           } else if (route.name === 'Profile') {
@@ -83,3 +93,23 @@ export default function Routes() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  badge: {
+    position: 'absolute',
+    right: -5,
+    top: -5,
+    zIndex: 2,
+    backgroundColor: '#F90000',
+    borderRadius: 100,
+    width: 20,
+    height: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  badgeText: {
+    fontSize: 16,
+    color: '#fff',
+  },
+});

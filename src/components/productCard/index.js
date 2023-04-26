@@ -1,9 +1,26 @@
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StarIcon} from '@src/constants/icons';
 import {CustomImage} from '@src/components';
+import {basketAddAction, removeCart} from '@src/redux/actions/cart/cartAction';
+import {useDispatch, useSelector} from 'react-redux';
 
 export default function ProductCard({navigate, data}) {
+  const dispatch = useDispatch();
+  const [total, setTotal] = useState(0);
+  const {cartItems} = useSelector(state => state.cart);
+
+  const addCart = () => {
+    dispatch(basketAddAction(data, 1));
+  };
+  const deleteCart = () => {
+    dispatch(removeCart(data?.id));
+  };
+
+  useEffect(() => {
+    setTotal(cartItems.find(x => x.id === data.id)?.quantity || 0);
+  }, [cartItems, data]);
+
   return (
     <View style={styles.card}>
       <TouchableOpacity
@@ -18,9 +35,23 @@ export default function ProductCard({navigate, data}) {
         </View>
         <Text style={styles.price}>{data?.price} ₺</Text>
         <Text style={styles.productName}>{data?.name}</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Add to Cart</Text>
-        </TouchableOpacity>
+        {total === 0 ? (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              addCart();
+            }}>
+            <Text style={styles.buttonText}>Add to Cart</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.removeButton}
+            onPress={() => {
+              deleteCart();
+            }}>
+            <Text style={styles.buttonText}>Remove to Cart</Text>
+          </TouchableOpacity>
+        )}
       </TouchableOpacity>
     </View>
   );
@@ -65,6 +96,13 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#2A59FE',
+    padding: 8,
+    width: '100%',
+    borderRadius: 4,
+    marginTop: 15,
+  },
+  removeButton: {
+    backgroundColor: '#F90000',
     padding: 8,
     width: '100%',
     borderRadius: 4,
