@@ -1,23 +1,23 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {StarIcon} from '@src/constants/icons';
+import {CustomImage} from '@src/components';
 
-export default function ProductCard({navigate}) {
+export default function ProductCard({navigate, data}) {
   return (
     <TouchableOpacity
       style={styles.card}
       onPress={() => {
-        navigate('Details');
+        navigate('Details', {data: data});
       }}>
-      <View style={styles.thumbnail}>
-        <TouchableOpacity>
-          <View style={styles.favoriteButton}>
-            <StarIcon />
-          </View>
+      <View style={{position: 'relative'}}>
+        <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
+        <TouchableOpacity style={styles.favoriteButton}>
+          <StarIcon />
         </TouchableOpacity>
       </View>
-      <Text style={styles.price}>15.000 ₺</Text>
-      <Text style={styles.productName}>iPhone 13 Pro Max 256Gb</Text>
+      <Text style={styles.price}>{data?.price} ₺</Text>
+      <Text style={styles.productName}>{data?.name}</Text>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Add to Cart</Text>
       </TouchableOpacity>
@@ -43,9 +43,7 @@ const styles = StyleSheet.create({
 
   thumbnail: {
     width: '100%',
-    height: 100,
-    backgroundColor: '#f6f6f6',
-    position: 'relative',
+    height: 130,
   },
   favoriteButton: {
     position: 'absolute',

@@ -2,14 +2,16 @@ import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import {ProductCard} from '@src/components';
 
-export default function ProductList({navigate}) {
+export default function ProductList({navigate, data}) {
   return (
     <View style={styles.productList}>
-      <ProductCard navigate={navigate} />
-      <ProductCard navigate={navigate} />
-      <ProductCard navigate={navigate} />
-      <ProductCard navigate={navigate} />
-      <ProductCard navigate={navigate} />
+      {data ? (
+        data?.map((item, index) => (
+          <ProductCard key={index} navigate={navigate} data={item} />
+        ))
+      ) : (
+        <Text>Loading..</Text>
+      )}
     </View>
   );
 }

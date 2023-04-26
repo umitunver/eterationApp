@@ -3,28 +3,23 @@ import React from 'react';
 import {CustomHeader} from '@src/components';
 import {StarIcon} from '@src/constants/icons';
 import {AddToCart} from '@src/views';
+import {CustomImage} from '@src/components';
 
-export default function Details({navigation: {goBack}}) {
+export default function Details({route, navigation: {goBack}}) {
+  const {data} = route.params;
   return (
     <View style={styles.container}>
       <CustomHeader type={'detail'} onPress={() => goBack()} />
       <View style={styles.contain}>
-        <View style={styles.thumbnail}>
-          <TouchableOpacity>
-            <View style={styles.favoriteButton}>
-              <StarIcon />
-            </View>
+        <View style={{position: 'relative'}}>
+          <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
+          <TouchableOpacity style={styles.favoriteButton}>
+            <StarIcon />
           </TouchableOpacity>
         </View>
-        <Text style={styles.title}>Apple iPhone 14 Pro Max 256 GB</Text>
-        <Text style={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-          sodales nibh pretium ipsum faucibus, a commodo tortor blandit. Duis
-          pellentesque, purus sed gravida sagittis, tortor urna eleifend ante, a
-          volutpat ex est vel ipsum. Etiam in auctor nisi. Donec in mattis enim,
-          in bibendum lorem. Nam vitae semper quam.
-        </Text>
-        <AddToCart />
+        <Text style={styles.title}>{data?.name}</Text>
+        <Text style={styles.description}>{data?.description}</Text>
+        <AddToCart data={data} />
       </View>
     </View>
   );
