@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home, Cart, Profile, Favorites, Details} from '@src/screens/index';
 import {useDispatch, useSelector} from 'react-redux';
 import {BasketIcon, FavIcon, HomeIcon, PersonIcon} from '@src/constants/icons';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -43,7 +43,7 @@ function TabMenu() {
         component={Home}
       />
       <Tab.Screen
-        options={{title: 'Cart', headerShown: false}}
+        options={{title: 'Cart', headerShown: false, tabBarLabel: 'Home PAge'}}
         name="Cart"
         component={Cart}
       />
@@ -74,7 +74,7 @@ export default function Routes() {
           options={{headerShown: false}}
           component={TabMenu}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="Details"
           options={{headerShown: false}}
           component={Details}
