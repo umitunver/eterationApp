@@ -17,13 +17,13 @@ function TabMenu() {
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           if (route.name === 'HomeTab') {
-            return <HomeIcon />;
+            return <HomeIcon focused={focused} />;
           } else if (route.name === 'Cart') {
-            return <BasketIcon />;
+            return <BasketIcon focused={focused} />;
           } else if (route.name === 'Favorites') {
-            return <FavIcon />;
+            return <FavIcon focused={focused} />;
           } else if (route.name === 'Profile') {
-            return <PersonIcon />;
+            return <PersonIcon focused={focused} />;
           }
         },
         tabBarShowLabel: false,

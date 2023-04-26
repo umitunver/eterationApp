@@ -5,6 +5,7 @@ const HomeIcon = props => (
     <Path fill="#fff" d="M1 1h32.309v30H1z" />
     <Path
       stroke="#000"
+      fill={props.focused ? '#000' : null}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
@@ -12,6 +13,7 @@ const HomeIcon = props => (
     />
     <Path
       stroke="#000"
+      fill={props.focused ? '#000' : null}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

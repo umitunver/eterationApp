@@ -1,4 +1,10 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import {CustomHeader} from '@src/components';
 import {StarIcon} from '@src/constants/icons';
@@ -7,18 +13,22 @@ import {CustomImage} from '@src/components';
 
 export default function Details({route, navigation: {goBack}}) {
   const {data} = route.params;
+
+  
   return (
     <View style={styles.container}>
       <CustomHeader type={'detail'} onPress={() => goBack()} />
       <View style={styles.contain}>
-        <View style={{position: 'relative'}}>
-          <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
-          <TouchableOpacity style={styles.favoriteButton}>
-            <StarIcon />
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.title}>{data?.name}</Text>
-        <Text style={styles.description}>{data?.description}</Text>
+        <ScrollView>
+          <View style={{position: 'relative'}}>
+            <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
+            <TouchableOpacity style={styles.favoriteButton}>
+              <StarIcon />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.title}>{data?.name}</Text>
+          <Text style={styles.description}>{data?.description}</Text>
+        </ScrollView>
         <AddToCart data={data} />
       </View>
     </View>
