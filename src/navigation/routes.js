@@ -2,8 +2,10 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home, Cart, Profile, Favorites} from '@src/screens/index';
+import {Home, Cart, Profile, Favorites, Details} from '@src/screens/index';
 import {useDispatch, useSelector} from 'react-redux';
+import {BasketIcon, FavIcon, HomeIcon, PersonIcon} from '@src/constants/icons';
+import {View} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -13,56 +15,30 @@ function TabMenu() {
     <Tab.Navigator
       initialRouteName="HomeTab"
       screenOptions={({route}) => ({
-        // tabBarIcon: ({focused, color, size}) => {
-        //   if (route.name === 'HomeTab') {
-        //     return (
-        //       <Icon
-        //         name={focused ? 'home' : 'home-outline'}
-        //         size={25}
-        //         color={focused ? '#FFCB02' : '#7E7E7E'}
-        //       />
-        //     );
-        //   } else if (route.name === 'Search') {
-        //     return (
-        //       <Icon
-        //         name={focused ? 'search' : 'search-outline'}
-        //         size={25}
-        //         color={focused ? '#FFCB02' : '#7E7E7E'}
-        //       />
-        //     );
-        //   } else if (route.name === 'Profile') {
-        //     return (
-        //       <Icon
-        //         name={focused ? 'person' : 'person-outline'}
-        //         size={25}
-        //         color={focused ? '#FFCB02' : '#7E7E7E'}
-        //       />
-        //     );
-        //   } else if (route.name === 'Campaigns') {
-        //     return (
-        //       <Icon
-        //         name={focused ? 'gift' : 'gift-outline'}
-        //         size={25}
-        //         color={focused ? '#FFCB02' : '#7E7E7E'}
-        //       />
-        //     );
-        //   }
-        // },
+        tabBarIcon: ({focused, color, size}) => {
+          if (route.name === 'HomeTab') {
+            return <HomeIcon />;
+          } else if (route.name === 'Cart') {
+            return <BasketIcon />;
+          } else if (route.name === 'Favorites') {
+            return <FavIcon />;
+          } else if (route.name === 'Profile') {
+            return <PersonIcon />;
+          }
+        },
         tabBarShowLabel: false,
         tabBarStyle: {
-          paddingBottom: 20,
-          paddingTop: 20,
-          height: 80,
+          paddingTop: 10,
+          paddingHorizontal: 20,
           backgroundColor: '#fff',
-          borderTopEndRadius: 35,
-          borderTopStartRadius: 35,
-          borderWidth: 0,
-          borderTopWidth: 0,
-          position: 'absolute',
+          borderTopWidth: 1,
         },
       })}>
       <Tab.Screen
-        options={{title: 'Home Page', headerShown: false}}
+        options={{
+          title: 'Home Page',
+          headerShown: false,
+        }}
         name="HomeTab"
         component={Home}
       />
@@ -78,7 +54,10 @@ function TabMenu() {
         component={Favorites}
       />
       <Tab.Screen
-        options={{title: 'Profile', headerShown: false}}
+        options={{
+          title: 'Profile',
+          headerShown: false,
+        }}
         name="Profile"
         component={Profile}
       />
@@ -94,6 +73,11 @@ export default function Routes() {
           name="Home"
           options={{headerShown: false}}
           component={TabMenu}
+        />
+         <Stack.Screen
+          name="Details"
+          options={{headerShown: false}}
+          component={Details}
         />
       </Stack.Navigator>
     </NavigationContainer>

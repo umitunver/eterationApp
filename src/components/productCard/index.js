@@ -2,9 +2,13 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {StarIcon} from '@src/constants/icons';
 
-export default function ProductCard() {
+export default function ProductCard({navigate}) {
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => {
+        navigate('Details');
+      }}>
       <View style={styles.thumbnail}>
         <TouchableOpacity>
           <View style={styles.favoriteButton}>

@@ -3,14 +3,14 @@ import React from 'react';
 import {CustomHeader, SearchInput} from '@src/components';
 import {FilterArea, ProductList} from '@src/views';
 
-export default function Home() {
+export default function Home({navigation: {goBack, navigate}}) {
   return (
     <View style={styles.container}>
-      <CustomHeader />
+      <CustomHeader type="normal" />
       <View style={styles.contain}>
         <SearchInput />
         <FilterArea />
-        <ProductList />
+        <ProductList navigate={navigate} />
       </View>
     </View>
   );
