@@ -5,23 +5,24 @@ import {CustomImage} from '@src/components';
 
 export default function ProductCard({navigate, data}) {
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => {
-        navigate('Details', {data: data});
-      }}>
-      <View style={{position: 'relative'}}>
-        <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
-        <TouchableOpacity style={styles.favoriteButton}>
-          <StarIcon />
+    <View style={styles.card}>
+      <TouchableOpacity
+        onPress={() => {
+          navigate('Details', {data: data});
+        }}>
+        <View style={{position: 'relative'}}>
+          <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
+          <TouchableOpacity style={styles.favoriteButton}>
+            <StarIcon />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.price}>{data?.price} ₺</Text>
+        <Text style={styles.productName}>{data?.name}</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Add to Cart</Text>
         </TouchableOpacity>
-      </View>
-      <Text style={styles.price}>{data?.price} ₺</Text>
-      <Text style={styles.productName}>{data?.name}</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Add to Cart</Text>
       </TouchableOpacity>
-    </TouchableOpacity>
+    </View>
   );
 }
 

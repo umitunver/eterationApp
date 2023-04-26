@@ -1,11 +1,12 @@
 import axios from 'axios';
 import {GET_PRODUCTS} from '@src/redux/api/products/productsAPI';
 
-export const getProductsCall = async () => {
+export const getProductsCall = async params => {
   try {
     const response = await axios({
       method: 'GET',
       url: GET_PRODUCTS,
+      params
     });
     const responseData = response?.data;
     return responseData;

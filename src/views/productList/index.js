@@ -1,26 +1,34 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import React from 'react';
 import {ProductCard} from '@src/components';
 
-export default function ProductList({navigate, data}) {
+export default function ProductList({navigate, data, fetchData}) {
+  const renderFooter = () => {
+    return (
+      <View style={{paddingVertical: 20}}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  };
+
   return (
-    <View style={styles.productList}>
-      {data ? (
-        data?.map((item, index) => (
-          <ProductCard key={index} navigate={navigate} data={item} />
-        ))
-      ) : (
-        <Text>Loading..</Text>
-      )}
-    </View>
+    data?.length > 1 && (
+      <FlatList
+        style={styles.productList}
+        data={data}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({item}) => <ProductCard navigate={navigate} data={item} />}
+        onEndReached={fetchData}
+        onEndReachedThreshold={0.1}
+        ListFooterComponent={renderFooter}
+        numColumns={2}
+      />
+    )
   );
 }
 
 const styles = StyleSheet.create({
   productList: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
     marginTop: 24,
   },
 });
