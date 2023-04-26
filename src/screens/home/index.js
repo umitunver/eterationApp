@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import {CustomHeader, SearchInput} from '@src/components';
+import {FilterArea, ProductList} from '@src/views';
 
 export default function Home() {
   return (
@@ -8,6 +9,8 @@ export default function Home() {
       <CustomHeader />
       <View style={styles.contain}>
         <SearchInput />
+        <FilterArea />
+        <ProductList />
       </View>
     </View>
   );
