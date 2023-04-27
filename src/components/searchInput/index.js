@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     left: 10,
-    top: 8,
+    top: Platform.OS === 'ios' ? 8 : 13,
   },
 });

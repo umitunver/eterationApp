@@ -13,7 +13,7 @@ export const favAddAction = data => {
   };
 };
 
-export const removeFav = id => {
+export const removeFav = data => {
   return async dispatch => {
     try {
       dispatch({

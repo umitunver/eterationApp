@@ -27,12 +27,16 @@ export default function Cart({navigation: {goBack, navigate}}) {
       <ScrollView style={styles.contain}>
         <BasketList cartItems={cartItems} />
       </ScrollView>
-      <PageBottomButton
-        title={'Total'}
-        total={totalPrice}
-        buttonText={'Complete'}
-        onPress={()=>{console.log("not found!")}}
-      />
+      {cartItems?.length > 0 && (
+        <PageBottomButton
+          title={'Total'}
+          total={totalPrice}
+          buttonText={'Complete'}
+          onPress={() => {
+            console.log('not found!');
+          }}
+        />
+      )}
     </View>
   );
 }

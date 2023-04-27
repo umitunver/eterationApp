@@ -4,7 +4,10 @@ import {StarIcon} from '@src/constants/icons';
 import {CustomImage} from '@src/components';
 import {basketAddAction, removeCart} from '@src/redux/actions/cart/cartAction';
 import {useDispatch, useSelector} from 'react-redux';
-import {favAddAction} from '@src/redux/actions/favorites/favoritesAction';
+import {
+  favAddAction,
+  removeFav,
+} from '@src/redux/actions/favorites/favoritesAction';
 
 export default function ProductCard({navigate, data}) {
   const dispatch = useDispatch();
@@ -22,6 +25,9 @@ export default function ProductCard({navigate, data}) {
 
   const addFavorite = () => {
     dispatch(favAddAction(data));
+  };
+  const removeFavorite = () => {
+    dispatch(removeFav(data));
   };
 
   useEffect(() => {
@@ -42,10 +48,11 @@ export default function ProductCard({navigate, data}) {
           <TouchableOpacity
             style={styles.favoriteButton}
             onPress={() => {
-              addFavorite();
+              {
+                favControl === 0 ? addFavorite() : removeFavorite();
+              }
             }}>
-               <StarIcon bgColor={favControl}/>
-          
+            <StarIcon bgColor={favControl} />
           </TouchableOpacity>
         </View>
         <Text style={styles.price}>{data?.price} ₺</Text>

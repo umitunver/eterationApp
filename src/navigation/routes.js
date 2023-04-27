@@ -5,13 +5,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home, Cart, Profile, Favorites, Details} from '@src/screens/index';
 import {useDispatch, useSelector} from 'react-redux';
 import {BasketIcon, FavIcon, HomeIcon, PersonIcon} from '@src/constants/icons';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Platform} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function TabMenu() {
-
   const {cartItems} = useSelector(state => state.cart);
 
   return (
@@ -25,9 +24,11 @@ function TabMenu() {
             return (
               <View style={{position: 'relative'}}>
                 <BasketIcon focused={focused} />
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{cartItems?.length}</Text>
-                </View>
+                {cartItems?.length > 0 && (
+                  <View style={styles.badge}>
+                    <Text style={styles.badgeText}>{cartItems?.length}</Text>
+                  </View>
+                )}
               </View>
             );
           } else if (route.name === 'Favorites') {
@@ -38,10 +39,10 @@ function TabMenu() {
         },
         tabBarShowLabel: false,
         tabBarStyle: {
-          paddingTop: 10,
-          paddingHorizontal: 20,
+          paddingTop: Platform.OS === 'ios' ? 10 : 0,
           backgroundColor: '#fff',
           borderTopWidth: 1,
+          height: Platform.OS === 'ios' ? 80 : 60,
         },
       })}>
       <Tab.Screen

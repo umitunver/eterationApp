@@ -35,7 +35,6 @@ export default function FilterModal({closePress}) {
     brandFilter ? brandFilter : [],
   );
 
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFilterAction());
@@ -219,13 +218,13 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 12,
     color: '#333333B2',
-    marginBottom: 22,
+    marginBottom: 17,
   },
   line: {
     backgroundColor: '#00000080',
     height: 1,
     width: '100%',
-    marginVertical: 20,
+    marginVertical: 10,
   },
   select: {
     flexDirection: 'row',
@@ -285,7 +284,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 16,
     right: 16,
-    bottom: 40,
+    bottom: Platform.OS === 'ios' ? 40 : 20,
   },
   primaryButtonText: {
     color: '#fff',
