@@ -1,8 +1,8 @@
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import {BasketCard} from '@src/components';
+import { BasketCard } from '@src/components';
 
-export default function BasketList({cartItems}) {
+export default function BasketList({ cartItems }) {
   return (
     <View>
       {cartItems?.length > 0 ? (
@@ -19,6 +19,6 @@ export default function BasketList({cartItems}) {
 const styles = StyleSheet.create({
   warning: {
     backgroundColor: '#f6f6f6',
-    padding: 16,
-  },
+    padding: 16
+  }
 });

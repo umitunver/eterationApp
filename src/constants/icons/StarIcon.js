@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Svg, {Path} from 'react-native-svg';
-const StarIcon = props => (
+import Svg, { Path } from 'react-native-svg';
+const StarIcon = (props) => (
   <Svg xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
     <Path
       fill={props.bgColor ? '#FFB800' : '#D9D9D9'}

@@ -1,28 +1,25 @@
 import {
   View,
-  Text,
   StyleSheet,
-  ScrollView,
   FlatList,
-  ActivityIndicator,
+  ActivityIndicator
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {CustomHeader, SearchInput} from '@src/components';
-import {FilterArea, ProductList} from '@src/views';
-import {getProductsAction} from '@src/redux/actions/products/productsActions';
-import {useDispatch, useSelector} from 'react-redux';
-import {ProductCard} from '@src/components';
-export default function Home({navigation: {goBack, navigate}}) {
-  const {productsData} = useSelector(state => state.products);
-  const {favoriteItems} = useSelector(state => state.favorites);
+import React, { useEffect, useState } from 'react';
+import { CustomHeader, SearchInput } from '@src/components';
+import { FilterArea } from '@src/views';
+import { getProductsAction } from '@src/redux/actions/products/productsActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { ProductCard } from '@src/components';
+export default function Home({ navigation: { navigate } }) {
+  const { productsData } = useSelector((state) => state.products);
   const PAGE_SIZE = 12;
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [searchKey, setSearchKey] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const {modelFilter, brandFilter, sortByFilter} = useSelector(
-    state => state.filters,
+  const { modelFilter, brandFilter, sortByFilter } = useSelector(
+    (state) => state.filters
   );
 
   const fetchData = async () => {
@@ -40,13 +37,13 @@ export default function Home({navigation: {goBack, navigate}}) {
       order:
         sortByFilter === 'newToOld' || sortByFilter === 'priceLowToHight'
           ? 'asc'
-          : 'desc',
+          : 'desc'
     };
     dispatch(getProductsAction(params));
     setIsLoading(false);
   };
   const handleLoadMore = () => {
-    setPage(prevPage => prevPage + 1);
+    setPage((prevPage) => prevPage + 1);
   };
 
   useEffect(() => {
@@ -60,12 +57,12 @@ export default function Home({navigation: {goBack, navigate}}) {
   }, [brandFilter, modelFilter, sortByFilter, searchKey]);
 
   useEffect(() => {
-    setData(prevData => [...prevData, ...productsData]);
+    setData((prevData) => [...prevData, ...productsData]);
   }, [productsData]);
 
   const renderFooter = () => {
     return isLoading ? (
-      <View style={{paddingVertical: 20, height: 40}}>
+      <View style={{ paddingVertical: 20, height: 40 }}>
         <ActivityIndicator size="large" />
       </View>
     ) : null;
@@ -83,7 +80,7 @@ export default function Home({navigation: {goBack, navigate}}) {
               style={styles.productList}
               data={data}
               keyExtractor={(item, index) => index}
-              renderItem={({item}) => {
+              renderItem={({ item }) => {
                 return <ProductCard navigate={navigate} data={item} />;
               }}
               onEndReached={handleLoadMore}
@@ -93,9 +90,9 @@ export default function Home({navigation: {goBack, navigate}}) {
               columnWrapperStyle={{
                 justifyContent: 'space-between',
                 flexDirection: 'row',
-                flexWrap: 'wrap',
+                flexWrap: 'wrap'
               }}
-              ListFooterComponentStyle={{marginBottom: 300}}
+              ListFooterComponentStyle={{ marginBottom: 300 }}
             />
           ) : null}
         </View>
@@ -107,12 +104,12 @@ export default function Home({navigation: {goBack, navigate}}) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    flex: 1,
+    flex: 1
   },
   contain: {
-    padding: 16,
+    padding: 16
   },
   productList: {
-    marginTop: 24,
-  },
+    marginTop: 24
+  }
 });

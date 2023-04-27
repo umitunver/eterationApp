@@ -1,11 +1,11 @@
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import React from 'react';
-import {ProductCard} from '@src/components';
+import { ProductCard } from '@src/components';
 
-export default function ProductList({navigate, data, fetchData}) {
+export default function ProductList({ navigate, data, fetchData }) {
   const renderFooter = () => {
     return (
-      <View style={{paddingVertical: 20}}>
+      <View style={{ paddingVertical: 20 }}>
         <Text>Loading...</Text>
       </View>
     );
@@ -16,8 +16,10 @@ export default function ProductList({navigate, data, fetchData}) {
       <FlatList
         style={styles.productList}
         data={data}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => <ProductCard navigate={navigate} data={item} />}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <ProductCard navigate={navigate} data={item} />
+        )}
         onEndReached={fetchData}
         onEndReachedThreshold={0.1}
         ListFooterComponent={renderFooter}
@@ -29,6 +31,6 @@ export default function ProductList({navigate, data, fetchData}) {
 
 const styles = StyleSheet.create({
   productList: {
-    marginTop: 24,
-  },
+    marginTop: 24
+  }
 });

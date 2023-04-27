@@ -3,29 +3,32 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
+  ScrollView
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {CustomHeader} from '@src/components';
-import {StarIcon} from '@src/constants/icons';
-import {PageBottomButton} from '@src/views';
-import {CustomImage} from '@src/components';
-import {useDispatch, useSelector} from 'react-redux';
-import {basketAddAction, removeCart} from '@src/redux/actions/cart/cartAction';
+import React, { useState, useEffect } from 'react';
+import { CustomHeader } from '@src/components';
+import { StarIcon } from '@src/constants/icons';
+import { PageBottomButton } from '@src/views';
+import { CustomImage } from '@src/components';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  basketAddAction,
+  removeCart
+} from '@src/redux/actions/cart/cartAction';
 import {
   favAddAction,
-  removeFav,
+  removeFav
 } from '@src/redux/actions/favorites/favoritesAction';
 
-export default function Details({route, navigation: {goBack}}) {
-  const {data} = route.params;
+export default function Details({ route, navigation: { goBack } }) {
+  const { data } = route.params;
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
-  const {cartItems} = useSelector(state => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
   const [favControl, setFavControl] = useState(0);
-  const {favoriteItems} = useSelector(state => state.favorites);
+  const { favoriteItems } = useSelector((state) => state.favorites);
   useEffect(() => {
-    setTotal(cartItems.find(x => x?.id === data?.id)?.quantity || 0);
+    setTotal(cartItems.find((x) => x?.id === data?.id)?.quantity || 0);
   }, [cartItems, data]);
   const addCart = () => {
     dispatch(basketAddAction(data, 1));
@@ -41,14 +44,14 @@ export default function Details({route, navigation: {goBack}}) {
     dispatch(removeFav(data));
   };
   useEffect(() => {
-    setFavControl(favoriteItems.find(x => x?.id === data?.id) || 0);
+    setFavControl(favoriteItems.find((x) => x?.id === data?.id) || 0);
   }, [favoriteItems, data]);
   return (
     <View style={styles.container}>
       <CustomHeader type={'detail'} onPress={() => goBack()} />
       <View style={styles.contain}>
         <ScrollView>
-          <View style={{position: 'relative'}}>
+          <View style={{ position: 'relative' }}>
             <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
             <TouchableOpacity
               style={styles.favoriteButton}
@@ -80,18 +83,18 @@ export default function Details({route, navigation: {goBack}}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   contain: {
     padding: 16,
     position: 'relative',
-    flex: 1,
+    flex: 1
   },
   thumbnail: {
     width: '100%',
     height: 200,
     backgroundColor: '#f6f6f6',
-    position: 'relative',
+    position: 'relative'
   },
   favoriteButton: {
     position: 'absolute',
@@ -99,14 +102,14 @@ const styles = StyleSheet.create({
     top: 6,
     zIndex: 2,
     width: 24,
-    height: 24,
+    height: 24
   },
   title: {
     fontWeight: '700',
     fontSize: 20,
-    marginTop: 16,
+    marginTop: 16
   },
   description: {
-    marginTop: 16,
-  },
+    marginTop: 16
+  }
 });

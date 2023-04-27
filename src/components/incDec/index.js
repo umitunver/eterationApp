@@ -3,20 +3,23 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Touchable,
+  Touchable
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {basketAddAction, removeCart} from '@src/redux/actions/cart/cartAction';
-import {useDispatch, useSelector} from 'react-redux';
-export default function IncDec({item}) {
+import React, { useEffect, useState } from 'react';
+import {
+  basketAddAction,
+  removeCart
+} from '@src/redux/actions/cart/cartAction';
+import { useDispatch, useSelector } from 'react-redux';
+export default function IncDec({ item }) {
   const dispatch = useDispatch();
 
   const [total, setTotal] = useState(0);
   const [increaseDecrease, setIncreaseDecrease] = useState(false);
-  const {cartItems} = useSelector(state => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
 
   useEffect(() => {
-    setTotal(cartItems.find(x => x.id === item.id)?.quantity || 0);
+    setTotal(cartItems.find((x) => x.id === item.id)?.quantity || 0);
   }, [cartItems, item]);
 
   const incDec = () => {
@@ -67,7 +70,7 @@ export default function IncDec({item}) {
 const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   quantity: {
     backgroundColor: '#2A59FE',
@@ -75,10 +78,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     height: 42,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   quantityText: {
-    color: '#fff',
+    color: '#fff'
   },
   button: {
     backgroundColor: '#E5E5E5',
@@ -86,11 +89,11 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     height: 39,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   textIcon: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#626b8b',
-  },
+    color: '#626b8b'
+  }
 });

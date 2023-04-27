@@ -1,6 +1,6 @@
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import {CustomHeader} from '@src/components';
+import { CustomHeader } from '@src/components';
 
 export default function Profile() {
   return (
@@ -16,9 +16,9 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    flex: 1,
+    flex: 1
   },
   content: {
-    padding: 16,
-  },
+    padding: 16
+  }
 });

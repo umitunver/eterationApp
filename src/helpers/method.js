@@ -1,4 +1,4 @@
-export const updateUrlToHttps = url => {
+export const updateUrlToHttps = (url) => {
   if (url.startsWith('http://')) {
     return url.replace('http://', 'https://');
   }

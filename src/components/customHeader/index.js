@@ -1,8 +1,8 @@
 import BackIcon from '@src/constants/icons/backIcon';
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function CustomHeader({type, onPress}) {
+export default function CustomHeader({ type, onPress }) {
   return (
     <>
       {type == 'normal' && (
@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#2A59FE',
     padding: 16,
-    marginTop: Platform.OS === 'ios' ? 55 : 0,
+    marginTop: Platform.OS === 'ios' ? 55 : 0
   },
   logoText: {
     fontSize: 24,
     lineHeight: 29,
     fontWeight: '800',
-    color: '#fff',
+    color: '#fff'
   },
   backHeader: {
     backgroundColor: '#2A59FE',
@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     marginTop: Platform.OS === 'ios' ? 55 : 0,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   title: {
     fontSize: 18,
     color: '#fff',
     fontWeight: '800',
-    marginLeft: 37.33,
-  },
+    marginLeft: 37.33
+  }
 });

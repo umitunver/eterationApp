@@ -1,22 +1,22 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {CustomHeader, SearchInput} from '@src/components';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { CustomHeader, SearchInput } from '@src/components';
 import {
   BasketList,
   FilterArea,
   PageBottomButton,
-  ProductList,
+  ProductList
 } from '@src/views';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
-export default function Cart({navigation: {goBack, navigate}}) {
-  const {cartItems} = useSelector(state => state.cart);
+export default function Cart({ navigation: { goBack, navigate } }) {
+  const { cartItems } = useSelector((state) => state.cart);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     let total = cartItems.reduce(
       (acc, val) => acc + val?.quantity * val?.price,
-      0,
+      0
     );
     setTotalPrice(total);
   }, [cartItems]);
@@ -44,9 +44,9 @@ export default function Cart({navigation: {goBack, navigate}}) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    flex: 1,
+    flex: 1
   },
   contain: {
-    padding: 16,
-  },
+    padding: 16
+  }
 });

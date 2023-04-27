@@ -1,8 +1,8 @@
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import React from 'react';
-import {SearchIcon} from '@src/constants/icons';
+import { SearchIcon } from '@src/constants/icons';
 
-export default function SearchInput({setSearchKey, type}) {
+export default function SearchInput({ setSearchKey, type }) {
   return (
     <View>
       {type === 'home' ? (
@@ -12,7 +12,7 @@ export default function SearchInput({setSearchKey, type}) {
           autoCapitalize="none"
           placeholderTextColor="#626b8b"
           keyboardType="web-search"
-          onSubmitEditing={event => {
+          onSubmitEditing={(event) => {
             const searchValue = event.nativeEvent.text;
             setSearchKey(searchValue);
           }}
@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#fafafb',
     paddingVertical: 9,
-    paddingLeft: 40,
+    paddingLeft: 40
   },
   icon: {
     position: 'absolute',
     left: 10,
-    top: Platform.OS === 'ios' ? 8 : 13,
-  },
+    top: Platform.OS === 'ios' ? 8 : 13
+  }
 });

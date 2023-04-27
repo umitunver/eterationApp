@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 export default function PageBottomButton({
@@ -6,7 +6,7 @@ export default function PageBottomButton({
   total,
   buttonText,
   onPress,
-  bgColor,
+  bgColor
 }) {
   return (
     <View style={styles.content}>
@@ -14,7 +14,9 @@ export default function PageBottomButton({
         <Text style={styles.priceText}>{title}:</Text>
         <Text style={styles.price}>{total} ₺</Text>
       </View>
-      <TouchableOpacity style={[styles.button, bgColor &&  {backgroundColor: bgColor}]} onPress={onPress}>
+      <TouchableOpacity
+        style={[styles.button, bgColor && { backgroundColor: bgColor }]}
+        onPress={onPress}>
         <Text style={styles.buttonText}>{buttonText}</Text>
       </TouchableOpacity>
     </View>
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     right: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   button: {
     backgroundColor: '#2A59FE',
@@ -37,19 +39,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 36,
     width: '100%',
     borderRadius: 4,
-    maxWidth: 182,
+    maxWidth: 182
   },
   buttonText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 16
   },
   priceText: {
     color: '#2A59FE',
     fontWeight: '700',
-    fontSize: 18,
+    fontSize: 18
   },
   price: {
-    fontSize: 18,
-  },
+    fontSize: 18
+  }
 });

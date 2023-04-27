@@ -1,20 +1,23 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {StarIcon} from '@src/constants/icons';
-import {CustomImage} from '@src/components';
-import {basketAddAction, removeCart} from '@src/redux/actions/cart/cartAction';
-import {useDispatch, useSelector} from 'react-redux';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StarIcon } from '@src/constants/icons';
+import { CustomImage } from '@src/components';
+import {
+  basketAddAction,
+  removeCart
+} from '@src/redux/actions/cart/cartAction';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   favAddAction,
-  removeFav,
+  removeFav
 } from '@src/redux/actions/favorites/favoritesAction';
 
-export default function ProductCard({navigate, data}) {
+export default function ProductCard({ navigate, data }) {
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
   const [favControl, setFavControl] = useState(0);
-  const {cartItems} = useSelector(state => state.cart);
-  const {favoriteItems} = useSelector(state => state.favorites);
+  const { cartItems } = useSelector((state) => state.cart);
+  const { favoriteItems } = useSelector((state) => state.favorites);
 
   const addCart = () => {
     dispatch(basketAddAction(data, 1));
@@ -31,19 +34,19 @@ export default function ProductCard({navigate, data}) {
   };
 
   useEffect(() => {
-    setTotal(cartItems.find(x => x?.id === data?.id)?.quantity || 0);
+    setTotal(cartItems.find((x) => x?.id === data?.id)?.quantity || 0);
   }, [cartItems, data]);
 
   useEffect(() => {
-    setFavControl(favoriteItems.find(x => x?.id === data?.id) || 0);
+    setFavControl(favoriteItems.find((x) => x?.id === data?.id) || 0);
   }, [favoriteItems, data]);
   return (
     <View style={styles.card}>
       <TouchableOpacity
         onPress={() => {
-          navigate('Details', {data: data});
+          navigate('Details', { data: data });
         }}>
-        <View style={{position: 'relative'}}>
+        <View style={{ position: 'relative' }}>
           <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
           <TouchableOpacity
             style={styles.favoriteButton}
@@ -86,18 +89,18 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 3,
     marginBottom: 14,
-    padding: 10,
+    padding: 10
   },
 
   thumbnail: {
     width: '100%',
-    height: 130,
+    height: 130
   },
   favoriteButton: {
     position: 'absolute',
@@ -105,34 +108,34 @@ const styles = StyleSheet.create({
     top: 6,
     zIndex: 2,
     width: 24,
-    height: 24,
+    height: 24
   },
   price: {
     color: '#2A59FE',
     fontWeight: '500',
-    marginTop: 15,
+    marginTop: 15
   },
   productName: {
     fontWeight: '500',
-    marginTop: 15,
+    marginTop: 15
   },
   button: {
     backgroundColor: '#2A59FE',
     padding: 8,
     width: '100%',
     borderRadius: 4,
-    marginTop: 15,
+    marginTop: 15
   },
   removeButton: {
     backgroundColor: '#F90000',
     padding: 8,
     width: '100%',
     borderRadius: 4,
-    marginTop: 15,
+    marginTop: 15
   },
   buttonText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 16,
-  },
+    fontSize: 16
+  }
 });

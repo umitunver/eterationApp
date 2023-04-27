@@ -1,8 +1,8 @@
-import {GET_PRODUCTS_DATA} from '@src/redux/type';
+import { GET_PRODUCTS_DATA } from '@src/redux/type';
 
 const INITIAL_STATE = {
   productsData: '',
-  isLoading: false,
+  isLoading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -11,10 +11,10 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         productsData: action.data,
-        isLoading: action.loading,
+        isLoading: action.loading
       };
 
     default:
-      return {...state};
+      return { ...state };
   }
 };

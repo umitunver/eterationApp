@@ -1,15 +1,15 @@
 import axios from 'axios';
-import {GET_FILTERS} from '@src/redux/api/filters/filtersAPI';
+import { GET_FILTERS } from '@src/redux/api/filters/filtersAPI';
 
-export const getFiltersCall = async params => {
+export const getFiltersCall = async (params) => {
   try {
     const response = await axios({
       method: 'GET',
       url: GET_FILTERS,
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      params,
+      params
     });
     const responseData = response?.data;
     return responseData;

@@ -1,7 +1,7 @@
-import {ADD_CART, REMOVE_CART} from '@src/redux/type';
+import { ADD_CART, REMOVE_CART } from '@src/redux/type';
 
 export const basketAddAction = (data, quantity) => {
-  return dispatch => {
+  return (dispatch) => {
     try {
       dispatch({
         type: ADD_CART,
@@ -9,8 +9,8 @@ export const basketAddAction = (data, quantity) => {
           id: data.id,
           quantity: quantity,
           price: data?.price,
-          name: data?.name,
-        },
+          name: data?.name
+        }
       });
     } catch (error) {
       console.log('error: action:', error);
@@ -18,14 +18,14 @@ export const basketAddAction = (data, quantity) => {
   };
 };
 
-export const removeCart = id => {
-  return async dispatch => {
+export const removeCart = (id) => {
+  return async (dispatch) => {
     try {
       dispatch({
         type: REMOVE_CART,
         data: {
-          id: id,
-        },
+          id: id
+        }
       });
     } catch (error) {
       console.log('error: action:', error);

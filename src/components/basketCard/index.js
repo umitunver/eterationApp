@@ -1,8 +1,8 @@
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import IncDec from '../incDec';
 
-export default function BasketCard({data}) {
+export default function BasketCard({ data }) {
   return (
     <View style={styles.card}>
       <View>
@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
-    marginBottom: 20,
+    marginBottom: 20
   },
   title: {
-    fontSize: 16,
+    fontSize: 16
   },
   price: {
     color: '#2A59FE',
-    fontWeight: '500',
-  },
+    fontWeight: '500'
+  }
 });

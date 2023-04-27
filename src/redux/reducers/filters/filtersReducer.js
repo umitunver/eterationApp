@@ -1,10 +1,10 @@
-import {ADD_FILTER, GET_FILTER} from '@src/redux/type';
+import { ADD_FILTER, GET_FILTER } from '@src/redux/type';
 
 const INITIAL_STATE = {
   sortByFilter: '',
   brandFilter: [],
   modelFilter: [],
-  filtersData: [],
+  filtersData: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,15 +14,15 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         sortByFilter: action.sortByFilter,
         brandFilter: action.brandFilter,
-        modelFilter: action.modelFilter,
+        modelFilter: action.modelFilter
       };
     case GET_FILTER:
       return {
         ...state,
-        filtersData: action.data,
+        filtersData: action.data
       };
 
     default:
-      return {...state};
+      return { ...state };
   }
 };

@@ -4,35 +4,35 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
-  ScrollView,
+  ScrollView
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {CheckIcon, CloseIcon} from '@src/constants/icons';
-import {sortByFilterData} from '@src/data/filterData';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { CheckIcon, CloseIcon } from '@src/constants/icons';
+import { sortByFilterData } from '@src/data/filterData';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   filterUpdateAction,
-  getFilterAction,
+  getFilterAction
 } from '@src/redux/actions/filters/filtersAction';
-import {SearchInput} from '@src/components';
+import { SearchInput } from '@src/components';
 
-export default function FilterModal({closePress}) {
-  const {filtersData} = useSelector(state => state.filters);
+export default function FilterModal({ closePress }) {
+  const { filtersData } = useSelector((state) => state.filters);
 
   const [brandSearch, setBrandSearch] = useState('');
   const [modelSearch, setModelSearch] = useState('');
-  const {modelFilter, brandFilter, sortByFilter} = useSelector(
-    state => state.filters,
+  const { modelFilter, brandFilter, sortByFilter } = useSelector(
+    (state) => state.filters
   );
 
   const [selectedValue, setSelectedValue] = useState(
-    sortByFilter ? sortByFilter : 'option1',
+    sortByFilter ? sortByFilter : 'option1'
   );
   const [selectedValuesModel, setSelectedModelValues] = useState(
-    modelFilter ? modelFilter : [],
+    modelFilter ? modelFilter : []
   );
   const [selectedValuesBrand, setSelectedBrandValues] = useState(
-    brandFilter ? brandFilter : [],
+    brandFilter ? brandFilter : []
   );
 
   const dispatch = useDispatch();
@@ -40,39 +40,47 @@ export default function FilterModal({closePress}) {
     dispatch(getFilterAction());
   }, []);
 
-  const brandSet = new Set(filtersData?.map(filtersData => filtersData?.brand));
-  const uniqueBrands = Array.from(brandSet).map(brand => {
+  const brandSet = new Set(
+    filtersData?.map((filtersData) => filtersData?.brand)
+  );
+  const uniqueBrands = Array.from(brandSet).map((brand) => {
     const productsWithBrand = filtersData.filter(
-      product => product.brand === brand,
+      (product) => product.brand === brand
     );
     return {
       brand,
-      products: productsWithBrand,
+      products: productsWithBrand
     };
   });
 
-  const modelSet = new Set(filtersData?.map(filtersData => filtersData.model));
-  const uniqueModels = Array.from(modelSet).map(model => {
+  const modelSet = new Set(
+    filtersData?.map((filtersData) => filtersData.model)
+  );
+  const uniqueModels = Array.from(modelSet).map((model) => {
     const productsWithModel = filtersData.filter(
-      product => product.model === model,
+      (product) => product.model === model
     );
     return {
       model,
-      products: productsWithModel,
+      products: productsWithModel
     };
   });
 
-  const handleCheckboxModel = value => {
+  const handleCheckboxModel = (value) => {
     if (selectedValuesModel.includes(value)) {
-      setSelectedModelValues(selectedValuesModel.filter(val => val !== value));
+      setSelectedModelValues(
+        selectedValuesModel.filter((val) => val !== value)
+      );
     } else {
       setSelectedModelValues([...selectedValuesModel, value]);
     }
   };
 
-  const handleCheckboxBrand = value => {
+  const handleCheckboxBrand = (value) => {
     if (selectedValuesBrand.includes(value)) {
-      setSelectedBrandValues(selectedValuesBrand.filter(val => val !== value));
+      setSelectedBrandValues(
+        selectedValuesBrand.filter((val) => val !== value)
+      );
     } else {
       setSelectedBrandValues([...selectedValuesBrand, value]);
     }
@@ -82,7 +90,7 @@ export default function FilterModal({closePress}) {
     const params = {
       sortByFilter: selectedValue,
       modelFilter: selectedValuesModel,
-      brandFilter: selectedValuesBrand,
+      brandFilter: selectedValuesBrand
     };
     dispatch(filterUpdateAction(params));
     closePress();
@@ -120,8 +128,8 @@ export default function FilterModal({closePress}) {
         <SearchInput setSearchKey={setBrandSearch} type={'filter'} />
         <ScrollView style={styles.area}>
           {uniqueBrands
-            ?.filter(item =>
-              item?.brand.toLowerCase().includes(brandSearch.toLowerCase()),
+            ?.filter((item) =>
+              item?.brand.toLowerCase().includes(brandSearch.toLowerCase())
             )
             ?.map((item, index) => (
               <TouchableOpacity
@@ -147,8 +155,8 @@ export default function FilterModal({closePress}) {
         <SearchInput setSearchKey={setModelSearch} type={'filter'} />
         <ScrollView style={styles.area}>
           {uniqueModels
-            ?.filter(item =>
-              item?.model.toLowerCase().includes(modelSearch.toLowerCase()),
+            ?.filter((item) =>
+              item?.model.toLowerCase().includes(modelSearch.toLowerCase())
             )
             ?.map((item, index) => (
               <TouchableOpacity
@@ -189,46 +197,46 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.1,
     shadowRadius: 1,
-    elevation: 1,
+    elevation: 1
   },
   closeButton: {
     position: 'absolute',
     top: 16,
     left: 26,
-    zIndex: 40,
+    zIndex: 40
   },
   headerTitle: {
     textAlign: 'center',
     fontWeight: '300',
-    fontSize: 20,
+    fontSize: 20
   },
   content: {
     padding: 16,
-    flex: 1,
+    flex: 1
   },
   area: {
     maxHeight: 110,
-    marginTop: 20,
+    marginTop: 20
   },
   areaTitle: {
     fontWeight: '400',
     fontSize: 12,
     color: '#333333B2',
-    marginBottom: 17,
+    marginBottom: 17
   },
   line: {
     backgroundColor: '#00000080',
     height: 1,
     width: '100%',
-    marginVertical: 10,
+    marginVertical: 10
   },
   select: {
     flexDirection: 'row',
-    marginBottom: 10,
+    marginBottom: 10
   },
   radioButton: {
     width: 16,
@@ -239,13 +247,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    marginRight: 10
   },
   radioInner: {
     backgroundColor: '#2A59FE',
     width: 8,
     height: 8,
-    borderRadius: 100,
+    borderRadius: 100
   },
   checkButton: {
     width: 16,
@@ -256,7 +264,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    marginRight: 10
   },
   checkButtonSelect: {
     width: 16,
@@ -268,13 +276,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    marginRight: 10
   },
   checkInner: {
     backgroundColor: '#2A59FE',
     width: 8,
     height: 8,
-    borderRadius: 100,
+    borderRadius: 100
   },
   primaryButton: {
     backgroundColor: '#2A59FE',
@@ -284,12 +292,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 16,
     right: 16,
-    bottom: Platform.OS === 'ios' ? 40 : 20,
+    bottom: Platform.OS === 'ios' ? 40 : 20
   },
   primaryButtonText: {
     color: '#fff',
     textAlign: 'center',
     fontSize: 18,
-    fontWeight: '700',
-  },
+    fontWeight: '700'
+  }
 });
