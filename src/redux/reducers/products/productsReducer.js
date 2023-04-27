@@ -1,4 +1,4 @@
-import * as types from '@src/redux/type';
+import {GET_PRODUCTS_DATA} from '@src/redux/type';
 
 const INITIAL_STATE = {
   productsData: '',
@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case types.GET_PRODUCTS_DATA:
+    case GET_PRODUCTS_DATA:
       return {
         ...state,
         productsData: action.data,

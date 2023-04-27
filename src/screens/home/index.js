@@ -18,8 +18,8 @@ export default function Home({navigation: {goBack, navigate}}) {
 
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
+  const [searchKey, setSearchKey] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
   const dispatch = useDispatch();
   const {modelFilter, brandFilter, sortByFilter} = useSelector(
     state => state.filters,
@@ -30,6 +30,7 @@ export default function Home({navigation: {goBack, navigate}}) {
     const params = {
       page,
       limit: PAGE_SIZE,
+      name: searchKey,
       brand: brandFilter ? brandFilter : null,
       model: modelFilter ? modelFilter : null,
       sortBy:
@@ -41,7 +42,6 @@ export default function Home({navigation: {goBack, navigate}}) {
           ? 'asc'
           : 'desc',
     };
-    console.log('params', params);
     dispatch(getProductsAction(params));
     setIsLoading(false);
   };
@@ -57,8 +57,7 @@ export default function Home({navigation: {goBack, navigate}}) {
     setData([]);
     setPage(1);
     fetchData();
-    console.log('yeni data cekilsinn...');
-  }, [brandFilter, modelFilter, sortByFilter]);
+  }, [brandFilter, modelFilter, sortByFilter, searchKey]);
 
   useEffect(() => {
     setData(prevData => [...prevData, ...productsData]);
@@ -76,7 +75,7 @@ export default function Home({navigation: {goBack, navigate}}) {
     <View style={styles.container}>
       <CustomHeader type="normal" />
       <View style={styles.contain}>
-        <SearchInput />
+        <SearchInput setSearchKey={setSearchKey} />
         <FilterArea />
         <View>
           {data?.length > 0 ? (
@@ -84,13 +83,18 @@ export default function Home({navigation: {goBack, navigate}}) {
               style={styles.productList}
               data={data}
               keyExtractor={(item, index) => index}
-              renderItem={({item}) => (
-                <ProductCard navigate={navigate} data={item} />
-              )}
+              renderItem={({item}) => {
+                return <ProductCard navigate={navigate} data={item} />;
+              }}
               onEndReached={handleLoadMore}
               onEndReachedThreshold={0.4}
               ListFooterComponent={renderFooter}
               numColumns={2}
+              columnWrapperStyle={{
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}
               ListFooterComponentStyle={{marginBottom: 300}}
             />
           ) : null}

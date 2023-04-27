@@ -5,3 +5,4 @@ export {default as PersonIcon} from './personIcon';
 export {default as FavIcon} from './favIcon';
 export {default as CloseIcon} from './closeIcon';
 export {default as CheckIcon} from './checkIcon';
+export {default as SearchIcon} from './searchIcon';

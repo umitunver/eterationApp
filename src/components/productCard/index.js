@@ -23,7 +23,7 @@ export default function ProductCard({navigate, data}) {
   };
 
   useEffect(() => {
-    setTotal(cartItems.find(x => x.id === data.id)?.quantity || 0);
+    setTotal(cartItems.find(x => x?.id === data?.id)?.quantity || 0);
   }, [cartItems, data]);
 
   return (
@@ -43,7 +43,7 @@ export default function ProductCard({navigate, data}) {
           </TouchableOpacity>
         </View>
         <Text style={styles.price}>{data?.price} ₺</Text>
-        <Text style={styles.productName}>{data?.name} {data?.brand} {data?.model}</Text>
+        <Text style={styles.productName}>{data?.name}</Text>
         {total === 0 ? (
           <TouchableOpacity
             style={styles.button}

@@ -1,4 +1,4 @@
-import * as types from '@src/redux/type';
+import {ADD_FILTER, GET_FILTER} from '@src/redux/type';
 
 const INITIAL_STATE = {
   sortByFilter: '',
@@ -9,14 +9,14 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case types.ADD_FILTER:
+    case ADD_FILTER:
       return {
         ...state,
         sortByFilter: action.sortByFilter,
         brandFilter: action.brandFilter,
         modelFilter: action.modelFilter,
       };
-    case types.GET_FILTER:
+    case GET_FILTER:
       return {
         ...state,
         filtersData: action.data,

@@ -14,6 +14,7 @@ import {
   filterUpdateAction,
   getFilterAction,
 } from '@src/redux/actions/filters/filtersAction';
+import {SearchInput} from '@src/components';
 
 export default function FilterModal({closePress}) {
   const {filtersData} = useSelector(state => state.filters);
@@ -39,9 +40,7 @@ export default function FilterModal({closePress}) {
     dispatch(getFilterAction());
   }, []);
 
-  const brandSet = new Set(
-    filtersData?.map(filtersData => filtersData?.brand),
-  );
+  const brandSet = new Set(filtersData?.map(filtersData => filtersData?.brand));
   const uniqueBrands = Array.from(brandSet).map(brand => {
     const productsWithBrand = filtersData.filter(
       product => product.brand === brand,
@@ -52,9 +51,7 @@ export default function FilterModal({closePress}) {
     };
   });
 
-  const modelSet = new Set(
-    filtersData?.map(filtersData => filtersData.model),
-  );
+  const modelSet = new Set(filtersData?.map(filtersData => filtersData.model));
   const uniqueModels = Array.from(modelSet).map(model => {
     const productsWithModel = filtersData.filter(
       product => product.model === model,
@@ -120,6 +117,7 @@ export default function FilterModal({closePress}) {
         </View>
         <View style={styles.line}></View>
         <Text style={styles.areaTitle}>Brand</Text>
+        <SearchInput />
         <ScrollView style={styles.area}>
           {uniqueBrands?.map((item, index) => (
             <TouchableOpacity
@@ -142,6 +140,7 @@ export default function FilterModal({closePress}) {
 
         <View style={styles.line}></View>
         <Text style={styles.areaTitle}>Model</Text>
+        <SearchInput />
         <ScrollView style={styles.area}>
           {uniqueModels?.map((item, index) => (
             <TouchableOpacity
@@ -205,6 +204,7 @@ const styles = StyleSheet.create({
   },
   area: {
     maxHeight: 110,
+    marginTop: 20
   },
   areaTitle: {
     fontWeight: '400',
