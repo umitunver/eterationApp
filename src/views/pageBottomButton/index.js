@@ -26,7 +26,7 @@ export default function PageBottomButton({
 const styles = StyleSheet.create({
   content: {
     position: 'absolute',
-    bottom: 30,
+    bottom: 0,
     left: 16,
     right: 16,
     flexDirection: 'row',
