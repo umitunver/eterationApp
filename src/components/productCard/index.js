@@ -43,7 +43,7 @@ export default function ProductCard({navigate, data}) {
           </TouchableOpacity>
         </View>
         <Text style={styles.price}>{data?.price} ₺</Text>
-        <Text style={styles.productName}>{data?.name}</Text>
+        <Text style={styles.productName}>{data?.name} {data?.brand}</Text>
         {total === 0 ? (
           <TouchableOpacity
             style={styles.button}

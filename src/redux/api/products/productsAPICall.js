@@ -6,7 +6,10 @@ export const getProductsCall = async params => {
     const response = await axios({
       method: 'GET',
       url: GET_PRODUCTS,
-      params
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params,
     });
     const responseData = response?.data;
     return responseData;

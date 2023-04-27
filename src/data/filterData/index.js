@@ -2,21 +2,21 @@ export const sortByFilterData = [
   {
     id: 1,
     title: 'Old to new',
-    name: 'option1',
+    name: 'oldToNew',
   },
   {
     id: 2,
     title: 'New to old',
-    name: 'option2',
+    name: 'newToOld',
   },
   {
     id: 3,
     title: 'Price hight to low',
-    name: 'option3',
+    name: 'priceHightToLow',
   },
   {
     id: 4,
     title: 'Price low to hight',
-    name: 'option4',
+    name: 'priceLowToHight',
   },
 ];

@@ -11,20 +11,34 @@ import {CheckIcon, CloseIcon} from '@src/constants/icons';
 import {sortByFilterData} from '@src/data/filterData';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProductsAction} from '@src/redux/actions/products/productsActions';
+import {filterUpdateAction} from '@src/redux/actions/filters/filtersAction';
 
 export default function FilterModal({closePress}) {
-  const [selectedValue, setSelectedValue] = useState('option1');
-  const [selectedValuesModal, setSelectedModalValues] = useState([]);
-  const [selectedValuesBrand, setSelectedBrandValues] = useState([]);
-
   const {productsData} = useSelector(state => state.products);
+
+  const {modelFilter, brandFilter, sortByFilter} = useSelector(
+    state => state.filters,
+  );
+
+  const [selectedValue, setSelectedValue] = useState(
+    sortByFilter ? sortByFilter : 'option1',
+  );
+  const [selectedValuesModel, setSelectedModelValues] = useState(
+    modelFilter ? modelFilter : [],
+  );
+  const [selectedValuesBrand, setSelectedBrandValues] = useState(
+    brandFilter ? brandFilter : [],
+  );
+
+  console.log('modelFilter', modelFilter);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductsAction());
   }, []);
 
   const brandSet = new Set(
-    productsData.map(productsData => productsData.brand),
+    productsData?.map(productsData => productsData.brand),
   );
   const uniqueBrands = Array.from(brandSet).map(brand => {
     const productsWithBrand = productsData.filter(
@@ -37,7 +51,7 @@ export default function FilterModal({closePress}) {
   });
 
   const modelSet = new Set(
-    productsData.map(productsData => productsData.model),
+    productsData?.map(productsData => productsData.model),
   );
   const uniqueModels = Array.from(modelSet).map(model => {
     const productsWithModel = productsData.filter(
@@ -49,11 +63,11 @@ export default function FilterModal({closePress}) {
     };
   });
 
-  const handleCheckboxModal = value => {
-    if (selectedValuesModal.includes(value)) {
-      setSelectedModalValues(selectedValuesModal.filter(val => val !== value));
+  const handleCheckboxModel = value => {
+    if (selectedValuesModel.includes(value)) {
+      setSelectedModelValues(selectedValuesModel.filter(val => val !== value));
     } else {
-      setSelectedModalValues([...selectedValuesModal, value]);
+      setSelectedModelValues([...selectedValuesModel, value]);
     }
   };
 
@@ -61,11 +75,20 @@ export default function FilterModal({closePress}) {
     if (selectedValuesBrand.includes(value)) {
       setSelectedBrandValues(selectedValuesBrand.filter(val => val !== value));
     } else {
-        setSelectedBrandValues([...selectedValuesBrand, value]);
+      setSelectedBrandValues([...selectedValuesBrand, value]);
     }
   };
 
-  console.log('selectedValuesModal', selectedValuesModal);
+  const handleFilter = () => {
+    const params = {
+      sortByFilter: selectedValue,
+      modelFilter: selectedValuesModel,
+      brandFilter: selectedValuesBrand,
+    };
+    dispatch(filterUpdateAction(params));
+    closePress();
+  };
+
   return (
     <Modal style={styles.modal}>
       <View style={styles.header}>
@@ -94,8 +117,8 @@ export default function FilterModal({closePress}) {
           ))}
         </View>
         <View style={styles.line}></View>
-        <ScrollView style={styles.area}>
         <Text style={styles.areaTitle}>Brand</Text>
+        <ScrollView style={styles.area}>
           {uniqueBrands?.map((item, index) => (
             <TouchableOpacity
               key={index}
@@ -116,16 +139,16 @@ export default function FilterModal({closePress}) {
         </ScrollView>
 
         <View style={styles.line}></View>
+        <Text style={styles.areaTitle}>Model</Text>
         <ScrollView style={styles.area}>
-          <Text style={styles.areaTitle}>Model</Text>
           {uniqueModels?.map((item, index) => (
             <TouchableOpacity
               key={index}
               style={styles.select}
               onPress={() => {
-                handleCheckboxModal(item?.model);
+                handleCheckboxModel(item?.model);
               }}>
-              {selectedValuesModal.includes(item?.model) ? (
+              {selectedValuesModel.includes(item?.model) ? (
                 <View style={styles.checkButtonSelect}>
                   <CheckIcon />
                 </View>
@@ -136,15 +159,20 @@ export default function FilterModal({closePress}) {
             </TouchableOpacity>
           ))}
         </ScrollView>
+
+        <TouchableOpacity
+          style={styles.primaryButton}
+          onPress={() => {
+            handleFilter();
+          }}>
+          <Text style={styles.primaryButtonText}>Primary</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  modal: {
-    position: 'absolute',
-  },
   header: {
     padding: 16,
     marginTop: Platform.OS === 'ios' ? 55 : 0,
@@ -171,9 +199,10 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 16,
+    flex: 1,
   },
   area: {
-    maxHeight: 200,
+    maxHeight: 110,
   },
   areaTitle: {
     fontWeight: '400',
@@ -236,5 +265,21 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 100,
+  },
+  primaryButton: {
+    backgroundColor: '#2A59FE',
+    padding: 8,
+    marginTop: 30,
+    borderRadius: 4,
+    position: 'absolute',
+    left: 16,
+    right: 16,
+    bottom: 40,
+  },
+  primaryButtonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '700',
   },
 });

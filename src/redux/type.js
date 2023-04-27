@@ -9,3 +9,6 @@ export const ALL_REMOVE_CART = 'ALL_REMOVE_CART';
 
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+
+// FILTERS
+export const ADD_FILTER = 'ADD_FILTER';
