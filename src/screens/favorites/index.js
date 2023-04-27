@@ -11,7 +11,7 @@ export default function Favorites({navigation: {goBack, navigate}}) {
     <View style={styles.container}>
       <CustomHeader type="normal" />
       <View style={styles.contain}>
-        {/* {favoriteItems?.length > 0 && (
+        {favoriteItems?.length > 0 && (
           <FlatList
             style={styles.productList}
             data={favoriteItems}
@@ -21,7 +21,7 @@ export default function Favorites({navigation: {goBack, navigate}}) {
             )}
             numColumns={2}
           />
-        )} */}
+        )}
       </View>
     </View>
   );

@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ProductCard} from '@src/components';
 export default function Home({navigation: {goBack, navigate}}) {
   const {productsData} = useSelector(state => state.products);
+  const {favoriteItems} = useSelector(state => state.favorites);
   const PAGE_SIZE = 12;
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);

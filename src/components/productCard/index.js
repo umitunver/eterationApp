@@ -9,7 +9,9 @@ import {favAddAction} from '@src/redux/actions/favorites/favoritesAction';
 export default function ProductCard({navigate, data}) {
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
+  const [favControl, setFavControl] = useState(0);
   const {cartItems} = useSelector(state => state.cart);
+  const {favoriteItems} = useSelector(state => state.favorites);
 
   const addCart = () => {
     dispatch(basketAddAction(data, 1));
@@ -26,6 +28,9 @@ export default function ProductCard({navigate, data}) {
     setTotal(cartItems.find(x => x?.id === data?.id)?.quantity || 0);
   }, [cartItems, data]);
 
+  useEffect(() => {
+    setFavControl(favoriteItems.find(x => x?.id === data?.id) || 0);
+  }, [favoriteItems, data]);
   return (
     <View style={styles.card}>
       <TouchableOpacity
@@ -39,7 +44,8 @@ export default function ProductCard({navigate, data}) {
             onPress={() => {
               addFavorite();
             }}>
-            <StarIcon />
+               <StarIcon bgColor={favControl}/>
+          
           </TouchableOpacity>
         </View>
         <Text style={styles.price}>{data?.price} ₺</Text>
