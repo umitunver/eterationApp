@@ -19,10 +19,13 @@ import {SearchInput} from '@src/components';
 export default function FilterModal({closePress}) {
   const {filtersData} = useSelector(state => state.filters);
 
+  const [brandSearch, setBrandSearch] = useState('');
+  const [modelSearch, setModelSearch] = useState('');
   const {modelFilter, brandFilter, sortByFilter} = useSelector(
     state => state.filters,
   );
 
+  console.log('brandSearch', brandSearch);
   const [selectedValue, setSelectedValue] = useState(
     sortByFilter ? sortByFilter : 'option1',
   );
@@ -117,48 +120,56 @@ export default function FilterModal({closePress}) {
         </View>
         <View style={styles.line}></View>
         <Text style={styles.areaTitle}>Brand</Text>
-        <SearchInput />
+        <SearchInput setSearchKey={setBrandSearch} type={'filter'} />
         <ScrollView style={styles.area}>
-          {uniqueBrands?.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.select}
-              onPress={() => {
-                handleCheckboxBrand(item?.brand);
-              }}>
-              {selectedValuesBrand.includes(item?.brand) ? (
-                <View style={styles.checkButtonSelect}>
-                  <CheckIcon />
-                </View>
-              ) : (
-                <View style={styles.checkButton}></View>
-              )}
-              <Text>{item?.brand}</Text>
-            </TouchableOpacity>
-          ))}
+          {uniqueBrands
+            ?.filter(item =>
+              item?.brand.toLowerCase().includes(brandSearch.toLowerCase()),
+            )
+            ?.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.select}
+                onPress={() => {
+                  handleCheckboxBrand(item?.brand);
+                }}>
+                {selectedValuesBrand.includes(item?.brand) ? (
+                  <View style={styles.checkButtonSelect}>
+                    <CheckIcon />
+                  </View>
+                ) : (
+                  <View style={styles.checkButton}></View>
+                )}
+                <Text>{item?.brand}</Text>
+              </TouchableOpacity>
+            ))}
         </ScrollView>
 
         <View style={styles.line}></View>
         <Text style={styles.areaTitle}>Model</Text>
-        <SearchInput />
+        <SearchInput setSearchKey={setModelSearch} type={'filter'} />
         <ScrollView style={styles.area}>
-          {uniqueModels?.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.select}
-              onPress={() => {
-                handleCheckboxModel(item?.model);
-              }}>
-              {selectedValuesModel.includes(item?.model) ? (
-                <View style={styles.checkButtonSelect}>
-                  <CheckIcon />
-                </View>
-              ) : (
-                <View style={styles.checkButton}></View>
-              )}
-              <Text>{item?.model}</Text>
-            </TouchableOpacity>
-          ))}
+          {uniqueModels
+            ?.filter(item =>
+              item?.model.toLowerCase().includes(modelSearch.toLowerCase()),
+            )
+            ?.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.select}
+                onPress={() => {
+                  handleCheckboxModel(item?.model);
+                }}>
+                {selectedValuesModel.includes(item?.model) ? (
+                  <View style={styles.checkButtonSelect}>
+                    <CheckIcon />
+                  </View>
+                ) : (
+                  <View style={styles.checkButton}></View>
+                )}
+                <Text>{item?.model}</Text>
+              </TouchableOpacity>
+            ))}
         </ScrollView>
 
         <TouchableOpacity
@@ -204,7 +215,7 @@ const styles = StyleSheet.create({
   },
   area: {
     maxHeight: 110,
-    marginTop: 20
+    marginTop: 20,
   },
   areaTitle: {
     fontWeight: '400',

@@ -1,14 +1,20 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-export default function PageBottomButton({title, total, buttonText}) {
+export default function PageBottomButton({
+  title,
+  total,
+  buttonText,
+  onPress,
+  bgColor,
+}) {
   return (
     <View style={styles.content}>
       <View>
         <Text style={styles.priceText}>{title}:</Text>
         <Text style={styles.price}>{total} ₺</Text>
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={[styles.button, bgColor &&  {backgroundColor: bgColor}]} onPress={onPress}>
         <Text style={styles.buttonText}>{buttonText}</Text>
       </TouchableOpacity>
     </View>

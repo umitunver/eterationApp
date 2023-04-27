@@ -15,7 +15,6 @@ import {ProductCard} from '@src/components';
 export default function Home({navigation: {goBack, navigate}}) {
   const {productsData} = useSelector(state => state.products);
   const PAGE_SIZE = 12;
-
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [searchKey, setSearchKey] = useState('');
@@ -75,7 +74,7 @@ export default function Home({navigation: {goBack, navigate}}) {
     <View style={styles.container}>
       <CustomHeader type="normal" />
       <View style={styles.contain}>
-        <SearchInput setSearchKey={setSearchKey} />
+        <SearchInput setSearchKey={setSearchKey} type={'home'} />
         <FilterArea />
         <View>
           {data?.length > 0 ? (
