@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   sortByFilter: '',
   brandFilter: [],
   modelFilter: [],
+  filtersData: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,6 +15,11 @@ export default (state = INITIAL_STATE, action) => {
         sortByFilter: action.sortByFilter,
         brandFilter: action.brandFilter,
         modelFilter: action.modelFilter,
+      };
+    case types.GET_FILTER:
+      return {
+        ...state,
+        filtersData: action.data,
       };
 
     default:

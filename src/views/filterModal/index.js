@@ -10,11 +10,13 @@ import React, {useEffect, useState} from 'react';
 import {CheckIcon, CloseIcon} from '@src/constants/icons';
 import {sortByFilterData} from '@src/data/filterData';
 import {useDispatch, useSelector} from 'react-redux';
-import {getProductsAction} from '@src/redux/actions/products/productsActions';
-import {filterUpdateAction} from '@src/redux/actions/filters/filtersAction';
+import {
+  filterUpdateAction,
+  getFilterAction,
+} from '@src/redux/actions/filters/filtersAction';
 
 export default function FilterModal({closePress}) {
-  const {productsData} = useSelector(state => state.products);
+  const {filtersData} = useSelector(state => state.filters);
 
   const {modelFilter, brandFilter, sortByFilter} = useSelector(
     state => state.filters,
@@ -34,14 +36,14 @@ export default function FilterModal({closePress}) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProductsAction());
+    dispatch(getFilterAction());
   }, []);
 
   const brandSet = new Set(
-    productsData?.map(productsData => productsData.brand),
+    filtersData?.map(filtersData => filtersData?.brand),
   );
   const uniqueBrands = Array.from(brandSet).map(brand => {
-    const productsWithBrand = productsData.filter(
+    const productsWithBrand = filtersData.filter(
       product => product.brand === brand,
     );
     return {
@@ -51,10 +53,10 @@ export default function FilterModal({closePress}) {
   });
 
   const modelSet = new Set(
-    productsData?.map(productsData => productsData.model),
+    filtersData?.map(filtersData => filtersData.model),
   );
   const uniqueModels = Array.from(modelSet).map(model => {
-    const productsWithModel = productsData.filter(
+    const productsWithModel = filtersData.filter(
       product => product.model === model,
     );
     return {

@@ -12,3 +12,4 @@ export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 
 // FILTERS
 export const ADD_FILTER = 'ADD_FILTER';
+export const GET_FILTER = 'GET_FILTER';

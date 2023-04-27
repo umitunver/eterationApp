@@ -25,7 +25,6 @@ export default function Home({navigation: {goBack, navigate}}) {
     state => state.filters,
   );
 
-  console.log('sortByFilter: ', sortByFilter);
   const fetchData = async () => {
     setIsLoading(true);
     const params = {
@@ -42,8 +41,7 @@ export default function Home({navigation: {goBack, navigate}}) {
           ? 'asc'
           : 'desc',
     };
-    console.log('sortByFilter', sortByFilter);
-    console.log('PARAMS', params);
+    console.log('params', params);
     dispatch(getProductsAction(params));
     setIsLoading(false);
   };
