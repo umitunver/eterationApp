@@ -15,7 +15,6 @@ import {ProductCard} from '@src/components';
 export default function Home({navigation: {goBack, navigate}}) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();

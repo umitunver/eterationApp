@@ -4,6 +4,7 @@ import {StarIcon} from '@src/constants/icons';
 import {CustomImage} from '@src/components';
 import {basketAddAction, removeCart} from '@src/redux/actions/cart/cartAction';
 import {useDispatch, useSelector} from 'react-redux';
+import {favAddAction} from '@src/redux/actions/favorites/favoritesAction';
 
 export default function ProductCard({navigate, data}) {
   const dispatch = useDispatch();
@@ -15,6 +16,10 @@ export default function ProductCard({navigate, data}) {
   };
   const deleteCart = () => {
     dispatch(removeCart(data?.id));
+  };
+
+  const addFavorite = () => {
+    dispatch(favAddAction(data));
   };
 
   useEffect(() => {
@@ -29,7 +34,11 @@ export default function ProductCard({navigate, data}) {
         }}>
         <View style={{position: 'relative'}}>
           <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
-          <TouchableOpacity style={styles.favoriteButton}>
+          <TouchableOpacity
+            style={styles.favoriteButton}
+            onPress={() => {
+              addFavorite();
+            }}>
             <StarIcon />
           </TouchableOpacity>
         </View>

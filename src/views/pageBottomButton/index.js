@@ -1,15 +1,15 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-export default function AddToCart({data}) {
+export default function PageBottomButton({title, total, buttonText}) {
   return (
     <View style={styles.content}>
       <View>
-        <Text style={styles.priceText}>Price:</Text>
-        <Text style={styles.price}>{data?.price} ₺</Text>
+        <Text style={styles.priceText}>{title}:</Text>
+        <Text style={styles.price}>{total} ₺</Text>
       </View>
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Add To Cart</Text>
+        <Text style={styles.buttonText}>{buttonText}</Text>
       </TouchableOpacity>
     </View>
   );

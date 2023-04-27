@@ -8,13 +8,12 @@ import {
 import React from 'react';
 import {CustomHeader} from '@src/components';
 import {StarIcon} from '@src/constants/icons';
-import {AddToCart} from '@src/views';
+import {PageBottomButton} from '@src/views';
 import {CustomImage} from '@src/components';
 
 export default function Details({route, navigation: {goBack}}) {
   const {data} = route.params;
 
-  
   return (
     <View style={styles.container}>
       <CustomHeader type={'detail'} onPress={() => goBack()} />
@@ -29,7 +28,12 @@ export default function Details({route, navigation: {goBack}}) {
           <Text style={styles.title}>{data?.name}</Text>
           <Text style={styles.description}>{data?.description}</Text>
         </ScrollView>
-        <AddToCart data={data} />
+        <PageBottomButton
+          title={'Price'}
+          total={data?.price}
+          buttonText={'Add To Cart'}
+          onPress={''}
+        />
       </View>
     </View>
   );

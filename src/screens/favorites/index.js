@@ -1,24 +1,28 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import React, {useEffect} from 'react';
-import {CustomHeader, SearchInput} from '@src/components';
-import {FilterArea, ProductList} from '@src/views';
+import {CustomHeader, ProductCard} from '@src/components';
 import {useDispatch, useSelector} from 'react-redux';
-import {getProductsAction} from '@src/redux/actions/products/productsActions';
 
 export default function Favorites({navigation: {goBack, navigate}}) {
-  const dispatch = useDispatch();
-  const {productsData} = useSelector(state => state.products);
+  const {favoriteItems} = useSelector(state => state.favorites);
 
-  useEffect(() => {
-    dispatch(getProductsAction());
-  }, []);
-
+  console.log('favoriteItems?.data', favoriteItems);
   return (
     <View style={styles.container}>
       <CustomHeader type="normal" />
-      <ScrollView style={styles.contain}>
-        <ProductList navigate={navigate} data={productsData} />
-      </ScrollView>
+      <View style={styles.contain}>
+        {/* {favoriteItems?.length > 0 && (
+          <FlatList
+            style={styles.productList}
+            data={favoriteItems}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({item}) => (
+              <ProductCard navigate={navigate} data={item} />
+            )}
+            numColumns={2}
+          />
+        )} */}
+      </View>
     </View>
   );
 }
@@ -30,5 +34,8 @@ const styles = StyleSheet.create({
   },
   contain: {
     padding: 16,
+  },
+  productList: {
+    marginTop: 24,
   },
 });

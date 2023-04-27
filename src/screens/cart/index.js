@@ -1,7 +1,12 @@
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {CustomHeader, SearchInput} from '@src/components';
-import {BasketList, FilterArea, ProductList} from '@src/views';
+import {
+  BasketList,
+  FilterArea,
+  PageBottomButton,
+  ProductList,
+} from '@src/views';
 import {useSelector} from 'react-redux';
 
 export default function Cart({navigation: {goBack, navigate}}) {
@@ -22,6 +27,12 @@ export default function Cart({navigation: {goBack, navigate}}) {
       <ScrollView style={styles.contain}>
         <BasketList cartItems={cartItems} />
       </ScrollView>
+      <PageBottomButton
+        title={'Total'}
+        total={totalPrice}
+        buttonText={'Complete'}
+        onPress={''}
+      />
     </View>
   );
 }

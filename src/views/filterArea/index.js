@@ -1,13 +1,21 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import FilterModal from '../filterModal';
 
 export default function FilterArea() {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.filter}>
       <Text style={styles.filterText}>Filters:</Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          setModalVisible(!modalVisible);
+        }}>
         <Text style={styles.buttonText}>Select Filter</Text>
       </TouchableOpacity>
+      <FilterModal />
     </View>
   );
 }

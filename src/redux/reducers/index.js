@@ -3,6 +3,7 @@ import {persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import productsReducer from './products/productsReducer';
 import cartReducer from './cart/cartReducer';
+import favoritesReducer from './favorites/favoritesReducer';
 const rootReducer = combineReducers({
   products: productsReducer,
   cart: persistReducer(
@@ -11,6 +12,13 @@ const rootReducer = combineReducers({
       storage: AsyncStorage,
     },
     cartReducer,
+  ),
+  favorites: persistReducer(
+    {
+      key: 'favoriteItems',
+      storage: AsyncStorage,
+    },
+    favoritesReducer,
   ),
 });
 
