@@ -4,6 +4,7 @@ import FilterModal from '../filterModal';
 
 export default function FilterArea() {
   const [modalVisible, setModalVisible] = useState(false);
+  
 
   return (
     <View style={styles.filter}>
@@ -15,7 +16,13 @@ export default function FilterArea() {
         }}>
         <Text style={styles.buttonText}>Select Filter</Text>
       </TouchableOpacity>
-      <FilterModal />
+      {modalVisible && (
+        <FilterModal
+          closePress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        />
+      )}
     </View>
   );
 }
