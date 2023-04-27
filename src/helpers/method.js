@@ -4,3 +4,10 @@ export const updateUrlToHttps = (url) => {
   }
   return url;
 };
+
+export const subString = (text, limit) => {
+  if (text?.length <= limit) {
+    return text;
+  }
+  return text?.substring(0, limit) + '...';
+};

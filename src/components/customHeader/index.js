@@ -2,7 +2,7 @@ import BackIcon from '@src/constants/icons/backIcon';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function CustomHeader({ type, onPress }) {
+export default function CustomHeader({ type, onPress, title }) {
   return (
     <>
       {type == 'normal' && (
@@ -15,7 +15,7 @@ export default function CustomHeader({ type, onPress }) {
           <TouchableOpacity onPress={onPress}>
             <BackIcon />
           </TouchableOpacity>
-          <Text style={styles.title}>Apple iPhone 14 Pro Max 256 GB </Text>
+          <Text style={styles.title}>{title || ''}</Text>
         </View>
       )}
     </>

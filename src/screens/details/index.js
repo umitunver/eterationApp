@@ -19,6 +19,7 @@ import {
   favAddAction,
   removeFav
 } from '@src/redux/actions/favorites/favoritesAction';
+import { subString } from '@src/helpers/method';
 
 export default function Details({ route, navigation: { goBack } }) {
   const { data } = route.params;
@@ -48,9 +49,13 @@ export default function Details({ route, navigation: { goBack } }) {
   }, [favoriteItems, data]);
   return (
     <View style={styles.container}>
-      <CustomHeader type={'detail'} onPress={() => goBack()} />
+      <CustomHeader
+        type={'detail'}
+        onPress={() => goBack()}
+        title={subString(data?.name, 20)}
+      />
       <View style={styles.contain}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{ position: 'relative' }}>
             <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
             <TouchableOpacity
@@ -110,6 +115,7 @@ const styles = StyleSheet.create({
     marginTop: 16
   },
   description: {
-    marginTop: 16
+    marginTop: 16,
+    marginBottom: 100
   }
 });
