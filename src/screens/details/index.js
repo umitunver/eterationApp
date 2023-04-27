@@ -12,14 +12,18 @@ import {PageBottomButton} from '@src/views';
 import {CustomImage} from '@src/components';
 import {useDispatch, useSelector} from 'react-redux';
 import {basketAddAction, removeCart} from '@src/redux/actions/cart/cartAction';
-import {favAddAction} from '@src/redux/actions/favorites/favoritesAction';
+import {
+  favAddAction,
+  removeFav,
+} from '@src/redux/actions/favorites/favoritesAction';
 
 export default function Details({route, navigation: {goBack}}) {
   const {data} = route.params;
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
   const {cartItems} = useSelector(state => state.cart);
-
+  const [favControl, setFavControl] = useState(0);
+  const {favoriteItems} = useSelector(state => state.favorites);
   useEffect(() => {
     setTotal(cartItems.find(x => x?.id === data?.id)?.quantity || 0);
   }, [cartItems, data]);
@@ -30,6 +34,15 @@ export default function Details({route, navigation: {goBack}}) {
     dispatch(removeCart(data?.id));
   };
 
+  const addFavorite = () => {
+    dispatch(favAddAction(data));
+  };
+  const removeFavorite = () => {
+    dispatch(removeFav(data));
+  };
+  useEffect(() => {
+    setFavControl(favoriteItems.find(x => x?.id === data?.id) || 0);
+  }, [favoriteItems, data]);
   return (
     <View style={styles.container}>
       <CustomHeader type={'detail'} onPress={() => goBack()} />
@@ -37,8 +50,14 @@ export default function Details({route, navigation: {goBack}}) {
         <ScrollView>
           <View style={{position: 'relative'}}>
             <CustomImage style={styles.thumbnail} imageUrl={data?.image} />
-            <TouchableOpacity style={styles.favoriteButton}>
-              <StarIcon />
+            <TouchableOpacity
+              style={styles.favoriteButton}
+              onPress={() => {
+                {
+                  favControl === 0 ? addFavorite() : removeFavorite();
+                }
+              }}>
+              <StarIcon bgColor={favControl} />
             </TouchableOpacity>
           </View>
           <Text style={styles.title}>{data?.name}</Text>
