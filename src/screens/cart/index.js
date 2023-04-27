@@ -31,7 +31,7 @@ export default function Cart({navigation: {goBack, navigate}}) {
         title={'Total'}
         total={totalPrice}
         buttonText={'Complete'}
-        onPress={''}
+        onPress={()=>{console.log("not found!")}}
       />
     </View>
   );

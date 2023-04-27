@@ -25,7 +25,6 @@ export default function FilterModal({closePress}) {
     state => state.filters,
   );
 
-  console.log('brandSearch', brandSearch);
   const [selectedValue, setSelectedValue] = useState(
     sortByFilter ? sortByFilter : 'option1',
   );
@@ -36,7 +35,6 @@ export default function FilterModal({closePress}) {
     brandFilter ? brandFilter : [],
   );
 
-  console.log('modelFilter', modelFilter);
 
   const dispatch = useDispatch();
   useEffect(() => {

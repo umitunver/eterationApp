@@ -6,7 +6,6 @@ import {useDispatch, useSelector} from 'react-redux';
 export default function Favorites({navigation: {goBack, navigate}}) {
   const {favoriteItems} = useSelector(state => state.favorites);
 
-  console.log('favoriteItems?.data', favoriteItems);
   return (
     <View style={styles.container}>
       <CustomHeader type="normal" />
